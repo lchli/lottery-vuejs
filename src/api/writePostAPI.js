@@ -1,30 +1,50 @@
-import  axios from 'axios'
+import axios from 'axios'
 import qs from 'qs'
 
 export default {
 
-  writePost(post,token) {
-    let data = new FormData();
-    data.append('content',post.content);
-    data.append('title',post.title);
-    document.cookie="uid="+token+"; path=/";
+    writePost(post, token) {
+        let data = new FormData();
+        data.append('content', post.content);
+        data.append('title', post.title);
 
-   return axios.post('/api/post/writePost',data)
-  },
+        document.cookie = "uid=" + token + "; path=/";
 
-  getPost(token) {
+        return axios.post('/api/post/writePost', data)
+    },
+    updatePost(post, token) {
+        let data = new FormData();
+        data.append('content', post.content);
+        data.append('title', post.title);
+        data.append('postId', post.postId);
+        document.cookie = "uid=" + token + "; path=/";
 
-    document.cookie="uid="+token+"; path=/";
+        return axios.post('/api/post/updatePost', data)
+    },
 
-    return axios.get('/api/post/getPost')
-  },
+    getPost(token) {
 
-  getPostById(token,postId) {
+        document.cookie = "uid=" + token + "; path=/";
 
-    document.cookie="uid="+token+"; path=/";
+        return axios.get('/api/post/getPosts')
+    },
 
-    return axios.get('/api/post/getPostById?postId='+postId)
-  },
+    getPostById(token, postId) {
+
+        document.cookie = "uid=" + token + "; path=/";
+
+        return axios.get('/api/post/getPostById?postId=' + postId)
+    },
+
+    likePost(token, postId) {
+
+        document.cookie = "uid=" + token + "; path=/";
+
+        let data = new FormData();
+        data.append('postId', postId);
+
+        return axios.post('/api/post/likePost',data);
+    },
 
 
 }

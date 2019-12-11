@@ -12,6 +12,14 @@ const actions = {
    getPostById({commit,rootState},postId) {
     commit('getPostById',{rootState:rootState,postId:postId})
   },
+    likePost({commit, rootState}, payload) {
+        payload.rootState=rootState;
+        commit('likePost', payload)
+    },
+    editPost({commit, rootState}, payload) {
+        commit('editPost', {rootState: rootState, router: payload.router, postId: payload.postId})
+    },
+
 
 }
 
@@ -24,7 +32,7 @@ const mutations = {
       // handle success
       console.log(response.data);
 
-      state.post = response.data;
+      state.post = response.data.post;
 
     })
       .catch(function (error) {
@@ -38,6 +46,32 @@ const mutations = {
       });
 
   },
+    editPost(state, payload) {
+        payload.router.push({path: '/writePost', query: {postId: payload.postId}})
+    },
+    likePost(state, payload) {
+
+        writePostAPI.likePost(payload.rootState.token, payload.postId).then(function (response) {
+            // handle success
+            // state.items = response.data;
+            console.log(response.data);
+
+            state.post.postLikeCount=response.data.postLikeCount;
+
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+                console.log("always executed");
+
+            });
+
+    },
 
 
 }

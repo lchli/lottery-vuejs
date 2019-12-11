@@ -16,10 +16,10 @@ const actions = {
     commit('register', {router: router, rootState: rootState})
   },
 
-  async logout({commit}, router) {
+   logout({commit,rootState}, router) {
     console.log("logout executed");
     //commit('register',await registerApi.getData())
-    commit('logout', router)
+    commit('logout', {router:router,rootState:rootState})
   },
   async loginAsync({commit, rootState}, router) {
 
@@ -50,7 +50,7 @@ const mutations = {
         // always executed
         console.log("always executed");
 
-        payload.router.push('/')
+        payload.router.push('/login')
       });
 
 
@@ -62,6 +62,7 @@ const mutations = {
       console.log(response.data);
 
       payload.rootState.token = response.data.token
+      payload.rootState.userName = response.data.userName
 
     })
       .catch(function (error) {
@@ -85,11 +86,12 @@ const mutations = {
   updatePwd(state, pwd) {
     state.pwd = pwd
   },
-  logout(state, router, rootState) {
-    rootState.userId = "";
-    rootState.userName = "";
+  logout(state, payload) {
+      payload.rootState.userId = "";
+      payload.rootState.userName = "";
+      payload.rootState.token = "";
 
-    router.push('/login')
+      payload.router.push('/')
   },
 
 

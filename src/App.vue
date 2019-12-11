@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav" style="display: flex ">
+    <div id="nav">
       <router-link to="/">3D</router-link>
-      <div v-if="token.length===0">
+
+      <div id="right-layout">
+      <div v-if="token.length===0" id="reg">
         <router-link to="/register">注册</router-link>
-        |
       </div>
-      <div v-if="token.length===0">
+
+      <div v-if="token.length===0" id="login">
       <router-link to="/login">登录</router-link>
       </div>
 
@@ -14,18 +16,28 @@
         <span>欢迎{{userName}}</span>
       </div>
 
-      <div  id="writePost" @click="writePost($router)">
-        <span>|  发帖</span>
+      <div v-if="token.length!==0" id="writePost" @click="writePost($router)">
+        <span>发帖</span>
       </div>
 
 
       <div v-if="token.length!==0" id="logout" @click="logout($router)">
-        <span>|  退出登录</span>
+        <span>退出登录</span>
+      </div>
+
       </div>
 
     </div>
+
+    <hr/>
+
+
     <router-view/>
+
+
+
   </div>
+
 </template>
 
 <style lang="scss">
@@ -33,12 +45,15 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: left;
     color: #2c3e50;
+    width: 100%;
   }
 
   #nav {
-    padding: 30px;
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
     a {
       font-weight: bold;
       color: #2c3e50;
@@ -52,12 +67,40 @@
   #welcome {
       text-align: left;
       color: #DC143C;
-      margin-left: 50px;
+
     }
 
   #logout {
     text-align: left;
-    margin-left: 5px;
+    margin-left: 15px;
+  }
+
+  #login {
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  #reg {
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  #writePost {
+    text-align: left;
+    margin-left: 15px;
+  }
+
+
+  #right-layout {
+    float:right;
+    display: flex;
+  }
+
+  hr{
+    margin: 0;
+    margin-bottom: 5px;
+    color: gray;
+    font-size: 1px;
   }
 </style>
 

@@ -5,7 +5,7 @@
 <input type="text" v-model="name" placeholder="input user name"><br>
 <input type="text" v-model="pwd" placeholder="input pwd" style="margin-top: 10px"><br>
 
-  <button @click="loginAsync($router)" style="margin-top: 10px">注册</button>
+  <button @click="loginAsync($router)" style="margin-top: 10px">登录</button>
 
   </div>
 

@@ -6,6 +6,7 @@ import store from './store';
 import ElementUI from 'element-ui'
 import VueQriously from 'vue-qriously'
 import VueQuillEditor from 'vue-quill-editor'
+import 'element-ui/lib/theme-chalk/index.css'
 
 // require styles
 import 'quill/dist/quill.core.css'
@@ -17,6 +18,7 @@ Vue.use(VueQriously);
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
+
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 

@@ -30,6 +30,13 @@ const actions = {
     //commit('register',await registerApi.getData())
     commit('commitPost', {router: router, rootState: rootState})
   },
+    getPostById({commit,rootState},postId) {
+        commit('getPostById',{rootState:rootState,postId:postId})
+    },
+    clearPost({commit,rootState}) {
+        commit('clearPost',{rootState:rootState})
+    },
+
 }
 
 
@@ -77,8 +84,36 @@ const mutations = {
     router.push('/writePost')
   },
 
+    clearPost(state) {
+        state.post={}
+    },
+
   commitPost(state, payload) {
     console.log("cnt:" + state.post);
+
+    if(state.post.postId!==null&&state.post.postId!==undefined){
+        console.log("cnt:update" );
+
+        writePostAPI.updatePost(state.post,payload.rootState.token).then(function (response) {
+            // handle success
+            console.log(response.data);
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+                console.log("always executed");
+
+                payload.router.push('/')
+            });
+
+        return;
+    }
+
+      console.log("cnt:add post" );
     writePostAPI.writePost(state.post,payload.rootState.token).then(function (response) {
       // handle success
       console.log(response.data);
@@ -97,6 +132,32 @@ const mutations = {
 
 
   },
+
+    getPostById(state, payload) {
+        // state.items.push(payload)
+
+        writePostAPI.getPostById(payload.rootState.token,payload.postId).then(function (response) {
+            // handle success
+            console.log(response.data);
+            const data=response.data;
+            if(data==undefined||data.post==undefined){
+              return;
+            }
+
+            state.post = data.post;
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+                console.log("always executed");
+
+            });
+
+    },
 
 }
 
