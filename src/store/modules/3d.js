@@ -2,7 +2,8 @@ import api3d from '../../api/3dAPI'
 import writePostAPI from '../../api/writePostAPI'
 
 const state = {
-    items: []
+    items: [],
+    searchkey:""
 }
 
 // getters
@@ -20,7 +21,9 @@ const actions = {
     postDetail({commit, rootState}, payload) {
         commit('postDetail', {rootState: rootState, router: payload.router, postId: payload.postId})
     },
-
+    search({commit, rootState}, payload) {
+        commit('search', {rootState: rootState})
+    },
 
 }
 
@@ -63,8 +66,41 @@ const mutations = {
         payload.router.push({path: '/postDetail', query: {postId: payload.postId}})
     },
 
+    updateSearchKey(state, key) {
+        state.searchkey = key
+    },
+    search(state, payload) {
+        // state.items.push(payload)
+
+        writePostAPI.search(payload.rootState.token,state.searchkey).then(function (response) {
+            // handle success
+            console.log(response.data);
+
+            const data = response.data;
+            if (data == undefined) {
+                return;
+            }
+            const posts=data.posts;
+            if (posts == undefined) {
+                return;
+            }
+
+            state.items = posts;
 
 
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+                console.log("always executed");
+
+
+            });
+
+    },
 }
 
 export default {

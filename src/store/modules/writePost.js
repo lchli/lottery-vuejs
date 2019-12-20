@@ -121,7 +121,7 @@ const mutations = {
     })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        console.log(error.message);
       })
       .finally(function () {
         // always executed

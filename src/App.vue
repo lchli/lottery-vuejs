@@ -148,9 +148,9 @@
         }
       },
       ...mapState( {
-        userId: rootState => rootState.userId,
-        userName: rootState => rootState.userName,
-        token: rootState => rootState.token,
+        userId: state => state.userId,
+        userName: state => state.userName,
+        token: state => state.token,
       })
 
 

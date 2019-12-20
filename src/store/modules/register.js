@@ -41,6 +41,8 @@ const mutations = {
       console.log(response.data);
       payload.rootState.userId = response.data.uid
       payload.rootState.userName = response.data.name
+
+        payload.router.push('/login')
     })
       .catch(function (error) {
         // handle error
@@ -50,7 +52,7 @@ const mutations = {
         // always executed
         console.log("always executed");
 
-        payload.router.push('/login')
+
       });
 
 

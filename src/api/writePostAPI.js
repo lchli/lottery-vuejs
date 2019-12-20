@@ -9,8 +9,16 @@ export default {
         data.append('title', post.title);
 
         document.cookie = "uid=" + token + "; path=/";
+        const  bear="Bearer " + token
 
-        return axios.post('/api/post/writePost', data)
+        console.log("bear:"+bear)
+
+        const headers={
+            'authorization': bear
+        }
+
+        return axios.post('/api/post/writePost', data,{headers:headers
+        });
     },
     updatePost(post, token) {
         let data = new FormData();
@@ -18,8 +26,12 @@ export default {
         data.append('title', post.title);
         data.append('postId', post.postId);
         document.cookie = "uid=" + token + "; path=/";
+        const  bear="Bearer "+token
 
-        return axios.post('/api/post/updatePost', data)
+        return axios.post('/api/post/updatePost', data,{
+            headers: {
+                'Authorization': bear
+            }})
     },
 
     getPost(token) {
@@ -42,8 +54,26 @@ export default {
 
         let data = new FormData();
         data.append('postId', postId);
+        const  bear="Bearer "+token
 
-        return axios.post('/api/post/likePost',data);
+        return axios.post('/api/post/likePost',data,{
+            headers: {
+                'Authorization': bear
+            }});
+    },
+
+    search(token,key) {
+
+        document.cookie = "uid=" + token + "; path=/";
+
+        return axios.get('/api/search/post/list',{
+            params: {
+                keyword: key,
+                sort: "title",
+                page: 0,
+                size: 30,
+            }
+        })
     },
 
 

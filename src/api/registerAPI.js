@@ -9,7 +9,7 @@ export default {
     data.append('username',name);
     data.append('headUrl','headUrl');
 
-   return axios.post('/api/ucenter/user',data)
+   return axios.post('/api/ucenter/register',data)
   },
 
   login(name,pwd) {

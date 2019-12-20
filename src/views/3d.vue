@@ -1,8 +1,8 @@
 <template>
     <div>
         <div id="search">
-            <input type="text" id="search-input"/>
-            <input type="button" value="搜索" id="search-bt"/>
+            <input type="text" id="search-input" v-model="searchkey"/>
+            <input type="button" value="搜索" id="search-bt" @click="search()"/>
 
         </div>
         <ul id="example-1">
@@ -66,7 +66,8 @@
         methods: {
             ...mapActions('ddd', [
                 'getPost', // map `this.increment()` to `this.$store.dispatch('increment')`
-                'postDetail'
+                'postDetail',
+                'search'
             ]),
 
 
@@ -79,6 +80,15 @@
 
             }),
             ...mapState('ddd', {})
+            ,
+            searchkey: {
+                get () {
+                    return this.$store.state.ddd.searchkey
+                },
+                set (value) {
+                    this.$store.commit('ddd/updateSearchKey', value)
+                }
+            },
         }
 
 
