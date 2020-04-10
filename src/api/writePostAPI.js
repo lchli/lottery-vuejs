@@ -1,80 +1,75 @@
 import axios from 'axios'
-import qs from 'qs'
 
 export default {
 
-    writePost(post, token) {
-        let data = new FormData();
-        data.append('content', post.content);
-        data.append('title', post.title);
+  writePost (post, token) {
+    const data = new FormData()
+    data.append('content', post.content)
+    data.append('title', post.title)
 
-        document.cookie = "uid=" + token + "; path=/";
-        const  bear="Bearer " + token
+    document.cookie = 'uid=' + token + '; path=/'
+    const bear = 'Bearer ' + token
 
-        console.log("bear:"+bear)
+    console.log('bear:' + bear)
 
-        const headers={
-            'authorization': bear
-        }
+    const headers = {
+      authorization: bear
+    }
 
-        return axios.post('/api/post/writePost', data,{headers:headers
-        });
-    },
-    updatePost(post, token) {
-        let data = new FormData();
-        data.append('content', post.content);
-        data.append('title', post.title);
-        data.append('postId', post.postId);
-        document.cookie = "uid=" + token + "; path=/";
-        const  bear="Bearer "+token
+    return axios.post('/api/post/writePost', data, { headers: headers })
+  },
+  updatePost (post, token) {
+    const data = new FormData()
+    data.append('content', post.content)
+    data.append('title', post.title)
+    data.append('postId', post.postId)
+    document.cookie = 'uid=' + token + '; path=/'
+    const bear = 'Bearer ' + token
 
-        return axios.post('/api/post/updatePost', data,{
-            headers: {
-                'Authorization': bear
-            }})
-    },
+    return axios.post('/api/post/updatePost', data, {
+      headers: {
+        Authorization: bear
+      }
+    })
+  },
 
-    getPost(token) {
+  getPost (token) {
+    document.cookie = 'uid=' + token + '; path=/'
 
-        document.cookie = "uid=" + token + "; path=/";
+    return axios.get('/api/post/getPosts')
+  },
 
-        return axios.get('/api/post/getPosts')
-    },
+  getPostById (token, postId) {
+    document.cookie = 'uid=' + token + '; path=/'
 
-    getPostById(token, postId) {
+    return axios.get('/api/post/getPostById?postId=' + postId)
+  },
 
-        document.cookie = "uid=" + token + "; path=/";
+  likePost (token, postId) {
+    document.cookie = 'uid=' + token + '; path=/'
 
-        return axios.get('/api/post/getPostById?postId=' + postId)
-    },
+    const data = new FormData()
+    data.append('postId', postId)
+    const bear = 'Bearer ' + token
 
-    likePost(token, postId) {
+    return axios.post('/api/post/likePost', data, {
+      headers: {
+        Authorization: bear
+      }
+    })
+  },
 
-        document.cookie = "uid=" + token + "; path=/";
+  search (token, key) {
+    document.cookie = 'uid=' + token + '; path=/'
 
-        let data = new FormData();
-        data.append('postId', postId);
-        const  bear="Bearer "+token
-
-        return axios.post('/api/post/likePost',data,{
-            headers: {
-                'Authorization': bear
-            }});
-    },
-
-    search(token,key) {
-
-        document.cookie = "uid=" + token + "; path=/";
-
-        return axios.get('/api/search/post/list',{
-            params: {
-                keyword: key,
-                sort: "title",
-                page: 0,
-                size: 30,
-            }
-        })
-    },
-
+    return axios.get('/api/search/post/list', {
+      params: {
+        keyword: key,
+        sort: 'title',
+        page: 0,
+        size: 30
+      }
+    })
+  }
 
 }

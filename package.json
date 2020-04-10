@@ -1,67 +1,47 @@
 {
-  "name": "lottery-bbs-vue",
-  "version": "0.1.0",
+  "name": "quasar_demo",
+  "version": "0.0.1",
+  "description": "A Quasar Framework app",
+  "productName": "Quasar App",
+  "cordovaId": "org.cordova.quasar.app",
+  "capacitorId": "",
+  "author": "lchli",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --fix --ext .js,.vue src",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "core-js": "^2.6.5",
-    "element-ui": "^2.11.1",
-    "qs": "^6.9.1",
-    "vue": "^2.6.10",
-    "vue-qriously": "^1.1.1",
-    "vue-quill-editor": "^3.0.6",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1",
-    "serialize-javascript": ">=2.1.1"
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.18.1",
+    "phantomjs-prebuilt": "^2.1.16",
+    "quasar": "^1.0.0",
+    "quill": "^1.3.7",
+    "vue": "^2.6.11",
+    "vue-i18n": "^8.0.0",
+    "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
-    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@quasar/app": "^1.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "lint-staged": "^8.1.5",
-    "sass": "^1.18.0",
-    "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.1.2"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/airbnb"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "last 1 version, not dead, ie >= 11"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+  "resolutions": {
+    "@babel/parser": "7.7.5"
   }
 }

@@ -1,24 +1,22 @@
-import  axios from 'axios'
-import qs from 'qs'
+import axios from 'axios'
 
 export default {
 
-  getData(name,pwd) {
-    let data = new FormData();
-    data.append('pwd',pwd);
-    data.append('username',name);
-    data.append('headUrl','headUrl');
+  getData (name, pwd) {
+    const data = new FormData()
+    data.append('pwd', pwd)
+    data.append('username', name)
+    data.append('headUrl', 'headUrl')
 
-   return axios.post('/api/ucenter/register',data)
+    return axios.post('/api/ucenter/register', data)
   },
 
-  login(name,pwd) {
-    let data = {};
-    data.password=pwd;
-    data.username=name;
+  login (name, pwd) {
+    const data = {}
+    data.password = pwd
+    data.username = name
 
-    return axios.post('/api/auth/userlogin',data)
-  },
-
+    return axios.post('/api/auth/userlogin', data)
+  }
 
 }
